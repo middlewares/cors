@@ -59,10 +59,10 @@ The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
 [ico-travis]: https://img.shields.io/travis/middlewares/cors/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/g/middlewares/cors.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/middlewares/cors.svg?style=flat-square
-[ico-sensiolabs]: https://img.shields.io/sensiolabs/i/36786f5a-2a15-4399-8817-8f24fcd8c0b4.svg?style=flat-square
+[ico-sensiolabs]: https://img.shields.io/sensiolabs/i/189702d3-2578-40c6-9700-6f351c859a7a.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/middlewares/cors
 [link-travis]: https://travis-ci.org/middlewares/cors
 [link-scrutinizer]: https://scrutinizer-ci.com/g/middlewares/cors
 [link-downloads]: https://packagist.org/packages/middlewares/cors
-[link-sensiolabs]: https://insight.sensiolabs.com/projects/36786f5a-2a15-4399-8817-8f24fcd8c0b4
+[link-sensiolabs]: https://insight.sensiolabs.com/projects/189702d3-2578-40c6-9700-6f351c859a7a
