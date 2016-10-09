@@ -8,7 +8,6 @@ use Interop\Http\Middleware\MiddlewareInterface;
 use Interop\Http\Middleware\DelegateInterface;
 use Neomerx\Cors\Analyzer;
 use Neomerx\Cors\Contracts\AnalysisResultInterface;
-use Neomerx\Cors\Contracts\AnalyzerInterface;
 use Neomerx\Cors\Contracts\Strategies\SettingsStrategyInterface;
 
 class Cors implements MiddlewareInterface
@@ -65,12 +64,12 @@ class Cors implements MiddlewareInterface
     /**
      * Adds cors headers to the response.
      *
-     * @param ResponseInterface $response
-     * @param AnalyzerInterface $cors
+     * @param ResponseInterface       $response
+     * @param AnalysisResultInterface $cors
      *
      * @return ResponseInterface
      */
-    private static function withCorsHeaders(ResponseInterface $response, AnalyzerInterface $cors)
+    private static function withCorsHeaders(ResponseInterface $response, AnalysisResultInterface $cors)
     {
         foreach ($cors->getResponseHeaders() as $name => $value) {
             $response = $response->withHeader($name, $value);
