@@ -4,9 +4,7 @@ namespace Middlewares\Tests;
 
 use Middlewares\Cors;
 use Middlewares\Utils\Dispatcher;
-use Middlewares\Utils\CallableMiddleware;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\Response;
+use Middlewares\Utils\Factory;
 use Neomerx\Cors\Strategies\Settings;
 use Neomerx\Cors\Contracts\Constants\CorsResponseHeaders;
 
@@ -60,12 +58,11 @@ class CorsTest extends \PHPUnit_Framework_TestCase
             ->setForceAddAllowedHeadersToPreFlightResponse(true)
             ->setCheckHost(true);
 
+        $request = Factory::createServerRequest([], 'GET', $url);
+
         $response = (new Dispatcher([
             new Cors($settings),
-            new CallableMiddleware(function () {
-                return new Response();
-            }),
-        ]))->dispatch(new ServerRequest([], [], $url));
+        ]))->dispatch($request);
 
         $this->assertInstanceOf('Psr\\Http\\Message\\ResponseInterface', $response);
         $this->assertEquals($statusCode, $response->getStatusCode());
