@@ -60,9 +60,9 @@ class CorsTest extends \PHPUnit_Framework_TestCase
 
         $request = Factory::createServerRequest([], 'GET', $url);
 
-        $response = (new Dispatcher([
+        $response = Dispatcher::run([
             new Cors($settings),
-        ]))->dispatch($request);
+        ], $request);
 
         $this->assertInstanceOf('Psr\\Http\\Message\\ResponseInterface', $response);
         $this->assertEquals($statusCode, $response->getStatusCode());
