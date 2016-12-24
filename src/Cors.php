@@ -6,25 +6,24 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
-use Neomerx\Cors\Analyzer;
+use Neomerx\Cors\Contracts\AnalyzerInterface;
 use Neomerx\Cors\Contracts\AnalysisResultInterface;
-use Neomerx\Cors\Contracts\Strategies\SettingsStrategyInterface;
 
 class Cors implements MiddlewareInterface
 {
     /**
-     * @var SettingsStrategyInterface
+     * @var AnalyzerInterface
      */
-    private $settings;
+    private $analyzer;
 
     /**
-     * Defines the settings used.
+     * Defines the analyzer used.
      *
-     * @param SettingsStrategyInterface $settings
+     * @param AnalyzerInterface $analyzer
      */
-    public function __construct(SettingsStrategyInterface $settings)
+    public function __construct(AnalyzerInterface $analyzer)
     {
-        $this->settings = $settings;
+        $this->analyzer = $analyzer;
     }
 
     /**
@@ -37,7 +36,7 @@ class Cors implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $cors = Analyzer::instance($this->settings)->analyze($request);
+        $cors = $this->analyzer->analyze($request);
 
         switch ($cors->getRequestType()) {
             case AnalysisResultInterface::ERR_NO_HOST_HEADER:

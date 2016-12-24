@@ -5,6 +5,7 @@ namespace Middlewares\Tests;
 use Middlewares\Cors;
 use Middlewares\Utils\Dispatcher;
 use Middlewares\Utils\Factory;
+use Neomerx\Cors\Analyzer;
 use Neomerx\Cors\Strategies\Settings;
 use Neomerx\Cors\Contracts\Constants\CorsResponseHeaders;
 
@@ -58,10 +59,12 @@ class CorsTest extends \PHPUnit_Framework_TestCase
             ->setForceAddAllowedHeadersToPreFlightResponse(true)
             ->setCheckHost(true);
 
+        $analyzer = Analyzer::instance($settings);
+
         $request = Factory::createServerRequest([], 'GET', $url);
 
         $response = Dispatcher::run([
-            new Cors($settings),
+            new Cors($analyzer),
         ], $request);
 
         $this->assertInstanceOf('Psr\\Http\\Message\\ResponseInterface', $response);

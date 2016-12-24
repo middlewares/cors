@@ -27,6 +27,7 @@ composer require middlewares/cors
 
 ```php
 use Neomerx\Cors\Strategies\Settings;
+use Neomerx\Cors\Analyzer;
 
 $settings = new Settings();
 $settings->setServerOrigin([
@@ -35,8 +36,10 @@ $settings->setServerOrigin([
     'port' => '123',
 ]);
 
+$analyzer = Analyzer::instance($settings);
+
 $dispatcher = new Dispatcher([
-	new Middlewares\Cors($settings)
+	new Middlewares\Cors($analyzer)
 ]);
 
 $response = $dispatcher->dispatch(new ServerRequest());
@@ -44,9 +47,9 @@ $response = $dispatcher->dispatch(new ServerRequest());
 
 ## Options
 
-#### `__construct(Neomerx\Cors\Contracts\Strategies\SettingsStrategyInterface $settings)`
+#### `__construct(Neomerx\Cors\Contracts\AnalyzerInterface $analyzer)`
 
-The CORS setting used. See [neomerx/cors-psr7](https://github.com/neomerx/cors-psr7) for more info about the available strategy options.
+The CORS analyzer used. See [neomerx/cors-psr7](https://github.com/neomerx/cors-psr7) for more info.
 
 ---
 
