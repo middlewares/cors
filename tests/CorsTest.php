@@ -2,6 +2,7 @@
 
 namespace Middlewares\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Middlewares\Cors;
 use Middlewares\Utils\Dispatcher;
 use Middlewares\Utils\Factory;
@@ -9,7 +10,7 @@ use Neomerx\Cors\Analyzer;
 use Neomerx\Cors\Strategies\Settings;
 use Neomerx\Cors\Contracts\Constants\CorsResponseHeaders;
 
-class CorsTest extends \PHPUnit_Framework_TestCase
+class CorsTest extends TestCase
 {
     public function corsProvider()
     {
