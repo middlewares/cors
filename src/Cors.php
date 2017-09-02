@@ -2,12 +2,12 @@
 
 namespace Middlewares;
 
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
-use Neomerx\Cors\Contracts\AnalyzerInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Neomerx\Cors\Contracts\AnalysisResultInterface;
+use Neomerx\Cors\Contracts\AnalyzerInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Cors implements MiddlewareInterface
 {
@@ -44,15 +44,12 @@ class Cors implements MiddlewareInterface
             case AnalysisResultInterface::ERR_METHOD_NOT_SUPPORTED:
             case AnalysisResultInterface::ERR_HEADERS_NOT_SUPPORTED:
                 return Utils\Factory::createResponse(403);
-
             case AnalysisResultInterface::TYPE_REQUEST_OUT_OF_CORS_SCOPE:
                 return $delegate->process($request);
-
             case AnalysisResultInterface::TYPE_PRE_FLIGHT_REQUEST:
                 $response = Utils\Factory::createResponse(200);
 
                 return self::withCorsHeaders($response, $cors);
-
             default:
                 $response = $delegate->process($request);
 
