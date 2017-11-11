@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Middlewares;
 
@@ -18,8 +19,6 @@ class Cors implements MiddlewareInterface
 
     /**
      * Defines the analyzer used.
-     *
-     * @param AnalyzerInterface $analyzer
      */
     public function __construct(AnalyzerInterface $analyzer)
     {
@@ -28,13 +27,8 @@ class Cors implements MiddlewareInterface
 
     /**
      * Process a request and return a response.
-     *
-     * @param ServerRequestInterface  $request
-     * @param RequestHandlerInterface $handler
-     *
-     * @return ResponseInterface
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $cors = $this->analyzer->analyze($request);
 
@@ -59,14 +53,11 @@ class Cors implements MiddlewareInterface
 
     /**
      * Adds cors headers to the response.
-     *
-     * @param ResponseInterface       $response
-     * @param AnalysisResultInterface $cors
-     *
-     * @return ResponseInterface
      */
-    private static function withCorsHeaders(ResponseInterface $response, AnalysisResultInterface $cors)
-    {
+    private static function withCorsHeaders(
+        ResponseInterface $response,
+        AnalysisResultInterface $cors
+    ): ResponseInterface {
         foreach ($cors->getResponseHeaders() as $name => $value) {
             $response = $response->withHeader($name, $value);
         }
