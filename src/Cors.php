@@ -42,11 +42,9 @@ class Cors implements MiddlewareInterface
                 return $handler->handle($request);
             case AnalysisResultInterface::TYPE_PRE_FLIGHT_REQUEST:
                 $response = Utils\Factory::createResponse(200);
-
                 return self::withCorsHeaders($response, $cors);
             default:
                 $response = $handler->handle($request);
-
                 return self::withCorsHeaders($response, $cors);
         }
     }

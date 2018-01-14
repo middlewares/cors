@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Middlewares\Tests;
 
@@ -12,20 +13,19 @@ use PHPUnit\Framework\TestCase;
 
 class CorsTest extends TestCase
 {
-    public function corsProvider()
+    public function corsProvider(): array
     {
         return [
-            ['http://not-valid.com:321', 403],
-            ['http://example.com:123', 200],
+            ['GET', 'http://not-valid.com:321', 403],
+            ['GET', 'http://example.com:123', 200],
+            ['GET', 'https://example.com:123', 200],
         ];
     }
 
     /**
      * @dataProvider corsProvider
-     * @param mixed $url
-     * @param mixed $statusCode
      */
-    public function testCors($url, $statusCode)
+    public function testCors(string $method, string $url, int $statusCode)
     {
         $settings = (new Settings())
             ->setServerOrigin([
@@ -64,13 +64,12 @@ class CorsTest extends TestCase
 
         $analyzer = Analyzer::instance($settings);
 
-        $request = Factory::createServerRequest([], 'GET', $url);
+        $response = Dispatcher::run(
+            [
+                new Cors($analyzer),
+            ],
+            Factory::createServerRequest([], $method, $url));
 
-        $response = Dispatcher::run([
-            new Cors($analyzer),
-        ], $request);
-
-        $this->assertInstanceOf('Psr\\Http\\Message\\ResponseInterface', $response);
         $this->assertEquals($statusCode, $response->getStatusCode());
     }
 }
