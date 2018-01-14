@@ -68,7 +68,8 @@ class CorsTest extends TestCase
             [
                 new Cors($analyzer),
             ],
-            Factory::createServerRequest([], $method, $url));
+            Factory::createServerRequest([], $method, $url)
+        );
 
         $this->assertEquals($statusCode, $response->getStatusCode());
     }
