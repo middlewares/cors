@@ -31,7 +31,7 @@ class CorsTest extends TestCase
             ->setServerOrigin([
                 'scheme' => 'http',
                 'host' => 'example.com',
-                'port' => '123',
+                'port' => 123,
             ])
             ->setRequestAllowedOrigins([
                 'http://good.example.com:321' => true,
@@ -68,7 +68,7 @@ class CorsTest extends TestCase
             [
                 new Cors($analyzer),
             ],
-            Factory::createServerRequest([], $method, $url)
+            Factory::createServerRequest($method, $url)
         );
 
         $this->assertEquals($statusCode, $response->getStatusCode());

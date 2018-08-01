@@ -33,7 +33,7 @@ $settings = new Settings();
 $settings->setServerOrigin([
     'scheme' => 'http',
     'host' => 'example.com',
-    'port' => '123',
+    'port' => 123,
 ]);
 
 $analyzer = Analyzer::instance($settings);
@@ -50,6 +50,10 @@ $response = $dispatcher->dispatch(new ServerRequest());
 #### `__construct(Neomerx\Cors\Contracts\AnalyzerInterface $analyzer)`
 
 The CORS analyzer used. See [neomerx/cors-psr7](https://github.com/neomerx/cors-psr7) for more info.
+
+#### `responseFactory(Psr\Http\Message\ResponseFactoryInterface $responseFactory)`
+
+A PSR-17 factory to create the responses.
 
 ---
 
