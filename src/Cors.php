@@ -4,6 +4,8 @@ declare(strict_types = 1);
 namespace Middlewares;
 
 use Middlewares\Utils\Traits\HasResponseFactory;
+use Middlewares\Utils\Factory;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Neomerx\Cors\Contracts\AnalysisResultInterface;
 use Neomerx\Cors\Contracts\AnalyzerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -23,9 +25,10 @@ class Cors implements MiddlewareInterface
     /**
      * Defines the analyzer used.
      */
-    public function __construct(AnalyzerInterface $analyzer)
+    public function __construct(AnalyzerInterface $analyzer, ResponseFactoryInterface $responseFactory = null)
     {
         $this->analyzer = $analyzer;
+        $this->responseFactory = $responseFactory ?: Factory::getResponseFactory();
     }
 
     /**
