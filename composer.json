@@ -18,7 +18,7 @@
     },
     "require": {
         "php": "^7.0",
-        "neomerx/cors-psr7": "^1.0",
+        "neomerx/cors-psr7": "^2.0",
         "middlewares/utils": "^2.1",
         "psr/http-server-middleware": "^1.0"
     },
