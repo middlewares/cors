@@ -17,8 +17,8 @@
         "issues": "https://github.com/middlewares/cors/issues"
     },
     "require": {
-        "php": "^7.0",
-        "neomerx/cors-psr7": "^1.0",
+        "php": "^7.1",
+        "neomerx/cors-psr7": "^2.0",
         "middlewares/utils": "^2.1",
         "psr/http-server-middleware": "^1.0"
     },
