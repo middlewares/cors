@@ -30,11 +30,7 @@ use Neomerx\Cors\Strategies\Settings;
 use Neomerx\Cors\Analyzer;
 
 $settings = new Settings();
-$settings->setServerOrigin([
-    'scheme' => 'http',
-    'host' => 'example.com',
-    'port' => 123,
-]);
+$settings->setServerOrigin('http', 'example.com', 123);
 
 $analyzer = Analyzer::instance($settings);
 
