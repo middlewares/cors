@@ -3,11 +3,10 @@ declare(strict_types = 1);
 
 namespace Middlewares;
 
-use Middlewares\Utils\Traits\HasResponseFactory;
 use Middlewares\Utils\Factory;
-use Psr\Http\Message\ResponseFactoryInterface;
 use Neomerx\Cors\Contracts\AnalysisResultInterface;
 use Neomerx\Cors\Contracts\AnalyzerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -15,12 +14,15 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class Cors implements MiddlewareInterface
 {
-    use HasResponseFactory;
-
     /**
      * @var AnalyzerInterface
      */
     private $analyzer;
+
+    /**
+     * @var ResponseFactoryInterface
+     */
+    private $responseFactory;
 
     /**
      * Defines the analyzer used.
@@ -43,11 +45,11 @@ class Cors implements MiddlewareInterface
             case AnalysisResultInterface::ERR_ORIGIN_NOT_ALLOWED:
             case AnalysisResultInterface::ERR_METHOD_NOT_SUPPORTED:
             case AnalysisResultInterface::ERR_HEADERS_NOT_SUPPORTED:
-                return $this->createResponse(403);
+                return $this->responseFactory->createResponse(403);
             case AnalysisResultInterface::TYPE_REQUEST_OUT_OF_CORS_SCOPE:
                 return $handler->handle($request);
             case AnalysisResultInterface::TYPE_PRE_FLIGHT_REQUEST:
-                $response = $this->createResponse(200);
+                $response = $this->responseFactory->createResponse(200);
                 return self::withCorsHeaders($response, $cors);
             default:
                 $response = $handler->handle($request);
