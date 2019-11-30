@@ -5,14 +5,13 @@
 [![Build Status][ico-travis]][link-travis]
 [![Quality Score][ico-scrutinizer]][link-scrutinizer]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![SensioLabs Insight][ico-sensiolabs]][link-sensiolabs]
 
 Middleware to implement Cross-Origin Resource Sharing (CORS) using [neomerx/cors-psr7](https://github.com/neomerx/cors-psr7).
 
 ## Requirements
 
-* PHP >= 7.0
-* A [PSR-7](https://packagist.org/providers/psr/http-message-implementation) http message implementation ([Diactoros](https://github.com/zendframework/zend-diactoros), [Guzzle](https://github.com/guzzle/psr7), [Slim](https://github.com/slimphp/Slim), etc...)
+* PHP >= 7.2
+* A [PSR-7 http library](https://github.com/middlewares/awesome-psr15-middlewares#psr-7-implementations)
 * A [PSR-15 middleware dispatcher](https://github.com/middlewares/awesome-psr15-middlewares#dispatcher)
 
 ## Installation
@@ -41,15 +40,16 @@ $dispatcher = new Dispatcher([
 $response = $dispatcher->dispatch(new ServerRequest());
 ```
 
-## Options
+## Usage
 
-#### `__construct(Neomerx\Cors\Contracts\AnalyzerInterface $analyzer)`
+You have to provide a `Neomerx\Cors\Contracts\AnalyzerInterface` to the constructor. See [neomerx/cors-psr7](https://github.com/neomerx/cors-psr7) for more info. Optionally, you can provide a `Psr\Http\Message\ResponseFactoryInterface` as the second argument, that will be used to create the responses. If it's not defined, [Middleware\Utils\Factory](https://github.com/middlewares/utils#factory) will be used to detect it automatically.
 
-The CORS analyzer used. See [neomerx/cors-psr7](https://github.com/neomerx/cors-psr7) for more info.
+```php
+$analyzer = Analyzer::instance($settings);
+$responseFactory = new MyOwnResponseFactory();
 
-#### `responseFactory(Psr\Http\Message\ResponseFactoryInterface $responseFactory)`
-
-A PSR-17 factory to create the responses.
+$cors = new Middlewares\Cors($analyzer, $responseFactory);
+```
 
 ---
 
@@ -62,10 +62,8 @@ The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
 [ico-travis]: https://img.shields.io/travis/middlewares/cors/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/g/middlewares/cors.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/middlewares/cors.svg?style=flat-square
-[ico-sensiolabs]: https://img.shields.io/sensiolabs/i/189702d3-2578-40c6-9700-6f351c859a7a.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/middlewares/cors
 [link-travis]: https://travis-ci.org/middlewares/cors
 [link-scrutinizer]: https://scrutinizer-ci.com/g/middlewares/cors
 [link-downloads]: https://packagist.org/packages/middlewares/cors
-[link-sensiolabs]: https://insight.sensiolabs.com/projects/189702d3-2578-40c6-9700-6f351c859a7a

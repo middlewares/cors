@@ -7,7 +7,6 @@ use Middlewares\Cors;
 use Middlewares\Utils\Dispatcher;
 use Middlewares\Utils\Factory;
 use Neomerx\Cors\Analyzer;
-use Neomerx\Cors\Contracts\Constants\CorsResponseHeaders;
 use Neomerx\Cors\Strategies\Settings;
 use PHPUnit\Framework\TestCase;
 
