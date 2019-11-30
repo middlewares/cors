@@ -34,7 +34,7 @@ $settings->setServerOrigin('http', 'example.com', 123);
 $analyzer = Analyzer::instance($settings);
 
 $dispatcher = new Dispatcher([
-	new Middlewares\Cors($analyzer)
+    new Middlewares\Cors($analyzer)
 ]);
 
 $response = $dispatcher->dispatch(new ServerRequest());
@@ -42,7 +42,7 @@ $response = $dispatcher->dispatch(new ServerRequest());
 
 ## Usage
 
-You have to provide a `Neomerx\Cors\Contracts\AnalyzerInterface` to the constructor. See [neomerx/cors-psr7](https://github.com/neomerx/cors-psr7) for more info. Optionally, you can provide a `Psr\Http\Message\ResponseFactoryInterface` as the second argument, that will be used to create the responses. If it's not defined, [Middleware\Utils\Factory](https://github.com/middlewares/utils#factory) will be used to detect it automatically.
+You have to provide a `Neomerx\Cors\Contracts\AnalyzerInterface` to the constructor. See [neomerx/cors-psr7](https://github.com/neomerx/cors-psr7) for more info. Optionally, you can provide a `Psr\Http\Message\ResponseFactoryInterface` as the second argument to create the responses. If it's not defined, [Middleware\Utils\Factory](https://github.com/middlewares/utils#factory) will be used to detect it automatically.
 
 ```php
 $analyzer = Analyzer::instance($settings);
