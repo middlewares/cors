@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.2] - 2022-10-27
+### Changed
+- Updated `neomerx/cors-psr7` dependency [#5].
+
 ## [2.0.1] - 2020-12-02
 ### Added
 - Support for PHP 8
@@ -58,9 +62,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Updated to `http-interop/http-middleware#0.3`
 
-## 0.1.0 - 2016-10-09
+## [0.1.0] - 2016-10-09
 First version
 
+[#5]: https://github.com/middlewares/cors/issues/5
+
+[2.0.2]: https://github.com/middlewares/cors/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/middlewares/cors/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/middlewares/cors/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/middlewares/cors/compare/v1.0.0...v1.1.0
@@ -69,3 +76,4 @@ First version
 [0.4.0]: https://github.com/middlewares/cors/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/middlewares/cors/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/middlewares/cors/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/middlewares/cors/releases/tag/v0.1.0
