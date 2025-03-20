@@ -12,6 +12,9 @@ use PHPUnit\Framework\TestCase;
 
 class CorsTest extends TestCase
 {
+    /**
+     * @return array<array<string|int>>
+     */
     public function corsProvider(): array
     {
         return [
@@ -24,7 +27,7 @@ class CorsTest extends TestCase
     /**
      * @dataProvider corsProvider
      */
-    public function testCors(string $method, string $url, int $statusCode)
+    public function testCors(string $method, string $url, int $statusCode): void
     {
         $settings = (new Settings())
             ->setServerOrigin('http', 'example.com', 123)
