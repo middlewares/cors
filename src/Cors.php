@@ -27,7 +27,7 @@ class Cors implements MiddlewareInterface
     /**
      * Defines the analyzer used.
      */
-    public function __construct(AnalyzerInterface $analyzer, ResponseFactoryInterface $responseFactory = null)
+    public function __construct(AnalyzerInterface $analyzer, ?ResponseFactoryInterface $responseFactory = null)
     {
         $this->analyzer = $analyzer;
         $this->responseFactory = $responseFactory ?: Factory::getResponseFactory();
@@ -50,9 +50,11 @@ class Cors implements MiddlewareInterface
                 return $handler->handle($request);
             case AnalysisResultInterface::TYPE_PRE_FLIGHT_REQUEST:
                 $response = $this->responseFactory->createResponse(200);
+
                 return self::withCorsHeaders($response, $cors);
             default:
                 $response = $handler->handle($request);
+
                 return self::withCorsHeaders($response, $cors);
         }
     }
